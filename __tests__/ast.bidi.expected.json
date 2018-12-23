@@ -3,7 +3,7 @@
     "elements": [
         {
             "type": "messageTextElement",
-            "value": "ǾǾƞ "
+            "value": "‮Ou ‬"
         },
         {
             "type": "argumentElement",
@@ -15,7 +15,7 @@
         },
         {
             "type": "messageTextElement",
-            "value": " "
+            "value": "‮ ‬"
         },
         {
             "type": "argumentElement",
@@ -24,7 +24,7 @@
         },
         {
             "type": "messageTextElement",
-            "value": " ŧǿǿǿǿķ "
+            "value": "‮ ʇooʞ ‬"
         },
         {
             "type": "argumentElement",
@@ -42,7 +42,7 @@
                             "elements": [
                                 {
                                     "type": "messageTextElement",
-                                    "value": "ƞǿǿ ƥħǿǿŧǿǿş."
+                                    "value": "‮uo dɥoʇos.‬"
                                 }
                             ]
                         }
@@ -55,7 +55,7 @@
                             "elements": [
                                 {
                                     "type": "messageTextElement",
-                                    "value": "ǿǿƞḗḗ ƥħǿǿŧǿǿ."
+                                    "value": "‮ouǝ dɥoʇo.‬"
                                 }
                             ]
                         }
@@ -68,7 +68,7 @@
                             "elements": [
                                 {
                                     "type": "messageTextElement",
-                                    "value": "# ƥħǿǿŧǿǿş."
+                                    "value": "‮# dɥoʇos.‬"
                                 }
                             ]
                         }

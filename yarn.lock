@@ -2654,6 +2654,11 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
+mutationobserver-shim@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#f4d5dae7a4971a2207914fb5a90ebd514b65acca"
+  integrity sha1-9NXa56SXGiIHkU+1qQ69UUtlrMo=
+
 mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
@@ -2987,6 +2992,11 @@ prop-types@^15.6.1:
 prr@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/prr/-/prr-0.0.0.tgz#1a84b85908325501411853d0081ee3fa86e2926a"
+
+pseudo-localization@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/pseudo-localization/-/pseudo-localization-1.3.0.tgz#303d2c24cdc5c90eab25c166d98a5bfee26555b4"
+  integrity sha512-mDt5QzVrU1Mtpq24fYjceX562BtBpTzOR6Q8bSXKVHrUjeO28N2txoYWtDlwsGYyEbzOjmHk5HiUqm0mQluKcw==
 
 pseudomap@^1.0.2:
   version "1.0.2"

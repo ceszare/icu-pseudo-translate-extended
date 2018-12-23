@@ -1,28 +1,35 @@
 import { oneLine } from 'common-tags';
-import { pseudoLetterMap } from '../src/lib/pseudoLetterMap';
+import 'mutationobserver-shim';
+
 import ast from './ast.json';
 import expectedAst from './ast.expected.json';
+import expectedAstBidi from './ast.bidi.expected.json';
 import { pseudoTranslate, translateText, transform } from '../src';
-
-describe('pseudoLetterMap', () => {
-    it('is a Map', () => {
-        expect(pseudoLetterMap instanceof Map).toBe(true);
-    });
-});
 
 describe('translateText fn', () => {
     it('translates text into pseudo translations', () => {
         const test = oneLine`Some text <do _not="translate this">Translate <yes>This</yes></do>. There is some unicode in heré! ôØh Nö!`;
         const result = translateText(test);
         expect(result).toBe(
-            `§ô₥è ƭèxƭ <do _not=\"translate this\">Třáñƨℓáƭè <yes>Thïƨ</yes></do>. Thèřè ïƨ ƨô₥è úñïçôδè ïñ hèřé! ôØh Nö!`
+            `Şǿǿḿḗḗ ŧḗḗẋŧ <do _not=\"translate this\">Ŧřȧȧƞşŀȧȧŧḗḗ <yes>Ŧħīş</yes></do>. Ŧħḗḗřḗḗ īş şǿǿḿḗḗ ŭŭƞīƈǿǿḓḗḗ īƞ ħḗḗřé! ôØħ Ƞö!`
         );
+    });
+    it('should support bidirectional language.', () => {
+        const test = 'Convert this to bidi mode.';
+        const result = translateText(test, true);
+        expect(result).toEqual('‮Ↄouʌǝɹʇ ʇɥıs ʇo qıpı ɯopǝ.‬');
     });
 });
 describe('transform fn', () => {
     it('translates only messageTextElements in an ast', () => {
-        const result = transform(ast);
+        const result = transform(JSON.parse(JSON.stringify(ast)));
         expect(result).toEqual(expectedAst);
+    });
+
+    it('should support bidirectional language translation.', () => {
+        const resultBidi = transform(JSON.parse(JSON.stringify(ast)), true);
+        console.log(resultBidi);
+        expect(resultBidi).toEqual(expectedAstBidi);
     });
 });
 
@@ -33,10 +40,10 @@ describe('pseudoTranslate fn', () => {
             =1 {one photo.}
             other {# photos.}}`;
 
-        const expectedMsg = oneLine`Óñ {takenDate, date, short} {name} ƭôôƙ {numPhotos, plural, 
-            =0 {ñô ƥhôƭôƨ.}
-            =1 {ôñè ƥhôƭô.} 
-            other {# ƥhôƭôƨ.}}`;
+        const expectedMsg = oneLine`ǾǾƞ {takenDate, date, short} {name} ŧǿǿǿǿķ {numPhotos, plural, 
+            =0 {ƞǿǿ ƥħǿǿŧǿǿş.}
+            =1 {ǿǿƞḗḗ ƥħǿǿŧǿǿ.} 
+            other {# ƥħǿǿŧǿǿş.}}`;
 
         const result = pseudoTranslate(testMsg);
         expect(result).toBe(expectedMsg);
@@ -48,8 +55,8 @@ describe('pseudoTranslate fn', () => {
             other {No taxes apply.}}`;
 
         const expected = oneLine`{taxableArea, select, 
-            yes {Âñ áδδïƭïôñáℓ {taxRate, number, percent} ƭáx ωïℓℓ βè çôℓℓèçƭèδ.} 
-            other {Nô ƭáxèƨ áƥƥℓ¥.}}`;
+            yes {ȦȦƞ ȧȧḓḓīŧīǿǿƞȧȧŀ {taxRate, number, percent} ŧȧȧẋ ẇīŀŀ ƀḗḗ ƈǿǿŀŀḗḗƈŧḗḗḓ.} 
+            other {Ƞǿǿ ŧȧȧẋḗḗş ȧȧƥƥŀẏ.}}`;
 
         const result = pseudoTranslate(test);
         expect(result).toBe(expected);
@@ -62,11 +69,11 @@ describe('pseudoTranslate fn', () => {
             few {#rd}
             other {#th}} birthday!`;
 
-        const expected = oneLine`Ìƭ'ƨ ₥¥ çáƭ'ƨ {year, selectordinal, 
-            one {#ƨƭ}
-            two {#ñδ}
-            few {#řδ}
-            other {#ƭh}} βïřƭhδá¥!`;
+        const expected = oneLine`Īŧ'ş ḿẏ ƈȧȧŧ'ş {year, selectordinal, 
+            one {#şŧ}
+            two {#ƞḓ}
+            few {#řḓ}
+            other {#ŧħ}} ƀīřŧħḓȧȧẏ!`;
 
         const result = pseudoTranslate(test);
         expect(result).toBe(expected);
@@ -95,20 +102,20 @@ describe('pseudoTranslate fn', () => {
         const expected = oneLine`
             {gender_of_host, select, 
                 female {{num_guests, plural, offset:1, 
-                        =0 {{host} δôèƨ ñôƭ ϱïƲè á ƥářƭ¥.} 
-                        =1 {{host} ïñƲïƭèƨ {guest} ƭô hèř ƥářƭ¥.} 
-                        =2 {{host} ïñƲïƭèƨ {guest} áñδ ôñè ôƭhèř ƥèřƨôñ ƭô hèř ƥářƭ¥.} 
-                        other {{host} ïñƲïƭèƨ {guest} áñδ # ôƭhèř ƥèôƥℓè ƭô hèř ƥářƭ¥.}}} 
+                        =0 {{host} ḓǿǿḗḗş ƞǿǿŧ ɠīṽḗḗ ȧȧ ƥȧȧřŧẏ.} 
+                        =1 {{host} īƞṽīŧḗḗş {guest} ŧǿǿ ħḗḗř ƥȧȧřŧẏ.} 
+                        =2 {{host} īƞṽīŧḗḗş {guest} ȧȧƞḓ ǿǿƞḗḗ ǿǿŧħḗḗř ƥḗḗřşǿǿƞ ŧǿǿ ħḗḗř ƥȧȧřŧẏ.} 
+                        other {{host} īƞṽīŧḗḗş {guest} ȧȧƞḓ # ǿǿŧħḗḗř ƥḗḗǿǿƥŀḗḗ ŧǿǿ ħḗḗř ƥȧȧřŧẏ.}}} 
                 male {{num_guests, plural, offset:1, 
-                        =0 {{host} δôèƨ ñôƭ ϱïƲè á ƥářƭ¥.} 
-                        =1 {{host} ïñƲïƭèƨ {guest} ƭô hïƨ ƥářƭ¥.} 
-                        =2 {{host} ïñƲïƭèƨ {guest} áñδ ôñè ôƭhèř ƥèřƨôñ ƭô hïƨ ƥářƭ¥.} 
-                        other {{host} ïñƲïƭèƨ {guest} áñδ # ôƭhèř ƥèôƥℓè ƭô hïƨ ƥářƭ¥.}}} 
+                        =0 {{host} ḓǿǿḗḗş ƞǿǿŧ ɠīṽḗḗ ȧȧ ƥȧȧřŧẏ.} 
+                        =1 {{host} īƞṽīŧḗḗş {guest} ŧǿǿ ħīş ƥȧȧřŧẏ.} 
+                        =2 {{host} īƞṽīŧḗḗş {guest} ȧȧƞḓ ǿǿƞḗḗ ǿǿŧħḗḗř ƥḗḗřşǿǿƞ ŧǿǿ ħīş ƥȧȧřŧẏ.} 
+                        other {{host} īƞṽīŧḗḗş {guest} ȧȧƞḓ # ǿǿŧħḗḗř ƥḗḗǿǿƥŀḗḗ ŧǿǿ ħīş ƥȧȧřŧẏ.}}} 
                 other {{num_guests, plural, offset:1, 
-                        =0 {{host} δôèƨ ñôƭ ϱïƲè á ƥářƭ¥.} 
-                        =1 {{host} ïñƲïƭèƨ {guest} ƭô ƭhèïř ƥářƭ¥.} 
-                        =2 {{host} ïñƲïƭèƨ {guest} áñδ ôñè ôƭhèř ƥèřƨôñ ƭô ƭhèïř ƥářƭ¥.} 
-                        other {{host} ïñƲïƭèƨ {guest} áñδ # ôƭhèř ƥèôƥℓè ƭô ƭhèïř ƥářƭ¥.}}}}`;
+                        =0 {{host} ḓǿǿḗḗş ƞǿǿŧ ɠīṽḗḗ ȧȧ ƥȧȧřŧẏ.} 
+                        =1 {{host} īƞṽīŧḗḗş {guest} ŧǿǿ ŧħḗḗīř ƥȧȧřŧẏ.} 
+                        =2 {{host} īƞṽīŧḗḗş {guest} ȧȧƞḓ ǿǿƞḗḗ ǿǿŧħḗḗř ƥḗḗřşǿǿƞ ŧǿǿ ŧħḗḗīř ƥȧȧřŧẏ.} 
+                        other {{host} īƞṽīŧḗḗş {guest} ȧȧƞḓ # ǿǿŧħḗḗř ƥḗḗǿǿƥŀḗḗ ŧǿǿ ŧħḗḗīř ƥȧȧřŧẏ.}}}}`;
 
         const result = pseudoTranslate(test);
         expect(result).toBe(expected);
