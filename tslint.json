@@ -1,0 +1,9 @@
+{
+    "extends": "@ceszare/tslint-house-rules",
+    "linterOptions": {
+        "exclude": [
+            "node_modules/**/*.ts",
+            "**/*.json"
+        ]
+    }
+}

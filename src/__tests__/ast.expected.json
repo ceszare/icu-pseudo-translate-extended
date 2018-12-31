@@ -1,0 +1,80 @@
+{
+  "type": "messageFormatPattern",
+  "elements": [
+    {
+      "type": "messageTextElement",
+      "value": "ǾǾƞ "
+    },
+    {
+      "type": "argumentElement",
+      "id": "takenDate",
+      "format": {
+        "type": "dateFormat",
+        "style": "short"
+      }
+    },
+    {
+      "type": "messageTextElement",
+      "value": " "
+    },
+    {
+      "type": "argumentElement",
+      "id": "name",
+      "format": null
+    },
+    {
+      "type": "messageTextElement",
+      "value": " ŧǿǿǿǿķ "
+    },
+    {
+      "type": "argumentElement",
+      "id": "numPhotos",
+      "format": {
+        "type": "pluralFormat",
+        "ordinal": false,
+        "offset": 0,
+        "options": [
+          {
+            "type": "optionalFormatPattern",
+            "selector": "=0",
+            "value": {
+              "type": "messageFormatPattern",
+              "elements": [
+                {
+                  "type": "messageTextElement",
+                  "value": "ƞǿǿ ƥħǿǿŧǿǿş."
+                }
+              ]
+            }
+          },
+          {
+            "type": "optionalFormatPattern",
+            "selector": "=1",
+            "value": {
+              "type": "messageFormatPattern",
+              "elements": [
+                {
+                  "type": "messageTextElement",
+                  "value": "ǿǿƞḗḗ ƥħǿǿŧǿǿ."
+                }
+              ]
+            }
+          },
+          {
+            "type": "optionalFormatPattern",
+            "selector": "other",
+            "value": {
+              "type": "messageFormatPattern",
+              "elements": [
+                {
+                  "type": "messageTextElement",
+                  "value": "# ƥħǿǿŧǿǿş."
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
