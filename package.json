@@ -2,7 +2,9 @@
   "name": "icu-pseudo-translate-extended",
   "version": "1.0.0",
   "description": "Translates ICU message strings into pseduo-translated ICU message strings.",
-  "main": "dist/index.js",
+  "main": "dist/icu-pseudo-translate-extended.cjs.js",
+  "types": "dist/icu-pseudo-translate-extended.d.ts",
+  "module": "dist/icu-pseudo-translate-extended.esm.js",
   "author": {
     "name": "Cesar Zapata",
     "email": "community@ceszare.com"
@@ -28,7 +30,7 @@
   "scripts": {
     "precommit": "yarn lint",
     "prepublish": "yarn build",
-    "build": "tsc",
+    "build": "rollup --config",
     "lint": "tslint -p . -c tslint.json",
     "test": "jest"
   },
@@ -44,7 +46,13 @@
     "common-tags": "^1.4.0",
     "jest": "^23.6.0",
     "mutationobserver-shim": "^0.3.2",
+    "rollup": "^1.0.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-typescript": "^1.0.0",
     "ts-jest": "^23.10.5",
+    "tslib": "^1.9.3",
     "tslint": "^5.12.0",
     "typescript": "3.1.x"
   }
