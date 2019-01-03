@@ -5,7 +5,7 @@ import { localize } from 'pseudo-localization';
 
 import { printICUMessage } from './lib/printICUMessage';
 
-function translateDom(domArray, useBidiMode) {
+function translateDom(domArray, useBidiMode: boolean) {
   return domArray.map(node => {
     if (node.type === 'text') {
       const localizationStrategy = useBidiMode ? 'bidi' : 'accented';
@@ -47,7 +47,7 @@ export function transform(ast, useBidiMode = false) {
   return ast;
 }
 
-export function pseudoTranslate(msg, useBidiMode = false) {
+export function pseudoTranslate(msg: string, useBidiMode = false) {
   const ast = parse(msg);
   const translated = transform(ast, useBidiMode);
   return printICUMessage(translated);
